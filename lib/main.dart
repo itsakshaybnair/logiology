@@ -8,20 +8,22 @@ import 'package:logiology/core/di/sevice_locator.dart';
 import 'package:logiology/core/routes/app_routes.dart';
 import 'package:logiology/core/theme/app_colors.dart';
 import 'package:logiology/core/theme/app_theme.dart';
-import 'package:logiology/features/home/data/local_data_source/user_info_data_source.dart';
-import 'package:logiology/features/home/presentation/controllers/product_controllers.dart';
+import 'package:logiology/features/auth/data/data_source/user_log_in_info_local_data_source.dart';
+import 'package:logiology/features/product/presentation/controllers/product_controllers.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setUpServiceLocator();
-  Get.put(ProductController(getIt()));
+ await setUpServiceLocator();
+  Get.put(ProductController(getIt(),getIt(),getIt()));
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: AppColors.transparentColor,
   ));
-  await UserPreferences.getUserData();
+
+  getIt<UserLogInInfoLocalDataSource>().getUserData();
+ 
 
   runApp(const MyApp());
 }

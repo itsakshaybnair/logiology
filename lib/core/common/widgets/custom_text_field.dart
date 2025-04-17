@@ -5,7 +5,7 @@ import 'package:logiology/core/theme/app_colors.dart';
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController? controller;
-  final TextInputType? keyboardType;
+  
   final bool obscureText;
   final ValueChanged<String>? onChanged;
   final String? Function(String?)? validator; 
@@ -14,7 +14,7 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.hintText,
     this.controller,
-    this.keyboardType,
+   
     this.obscureText = false,
     this.onChanged,
     this.validator,
@@ -24,7 +24,8 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField( 
       controller: controller,
-      keyboardType: keyboardType,
+      textInputAction: obscureText? TextInputAction.done :TextInputAction.next,
+    
       obscureText: obscureText,
       onChanged: onChanged,
       validator: validator, 
